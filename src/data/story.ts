@@ -1,85 +1,93 @@
 import { Scene } from '../types';
 
 export const INITIAL_STATS = {
-  Harmony: 50,
-  Chaos: 0,
-  Insight: 10,
-  Sin: 0,
+  Affection: 0,
+  Ruthless: 0,
+  Gentle: 0,
 };
 
 export const STORY_DATA: Record<string, Scene> = {
+  // Mapping the Narrator/Aris intro section
   intro: {
     id: 'intro',
-    background: 'https://picsum.photos/seed/nebula/1920/1080',
+    background: 'bg.jpeg',
     characters: [
-      { id: 'aris', name: 'Dr. Aris', image: '/aris.png', position: 'center' }
+      { id: 'aris', name: 'Dr. Aris', image: 'aris.png', position: 'right' }
     ],
     dialogue: [
-      "The reactor hums with a frequency I've never heard before.",
-      "They called me mad for chasing the Ethereal Core. But look at it now.",
-      "It doesn't just produce energy... it produces possibilities."
+      "The gala at the Spine was, as always, suffocating. Located at the dead center of Aethel, the neutral capital was a place where people who did not fight in the frontlines showed off their massive amount of wealth and aether stones.",
+      "While the Great Leaders were locked away in the High Chamber, their courts and high nobility were left to mingle in the ballroom below.",
+      "It was a sea of dangerous beauty. To the left, the Seraphim nobility stood like statues of living pearl... to the right, the Demon aristocrats lounged in velvet chairs.",
+      "A cathedral of excess, with an excessive amount of obsidian marble and floating Aether-crystals. The air smelled of expensive potions, bloody slaves, and floral perfumes.",
+      "Dr. Aris Thorne stood in a corner, his expression that of a gentle scholar—the picture of the academic look.",
+      "No one looked into his eyes long enough to see the abyss behind the glasses."
     ],
     choices: [
-      { id: 'stabilize', text: 'Apply stabilization field', nextSceneId: 'stable_path', impact: { stat: 'Harmony', value: 10 } },
-      { id: 'push', text: 'Push the energy beyond the limit', nextSceneId: 'chaos_path', impact: { stat: 'Chaos', value: 20 } }
+      { id: 'think_scorpion', text: "Think about your biggest achievement: Experiment No. 1 (Scorpion)", nextSceneId: 'exp_scorpion' },
+      { id: 'think_acrux', text: "Think about your failure: Experiment No. 2 (Acrux)", nextSceneId: 'exp_acrux' },
+      { id: 'think_elara', text: "The Woman Who Owns My Soul: Admire Elara from afar", nextSceneId: 'admire_elara' }
     ]
   },
-  stable_path: {
-    id: 'stable_path',
-    background: 'https://picsum.photos/seed/lab/1920/1080',
-    characters: [
-      { id: 'aris', name: 'Dr. Aris', image: '/aris.png', position: 'left' },
-      { id: 'lyra', name: 'Lyra', image: 'https://api.dicebear.com/7.x/bottts/svg?seed=lyra', position: 'right' }
-    ],
+
+  exp_scorpion: {
+    id: 'exp_scorpion',
+    background: 'bg.jpg.jpeg',
+    characters: [{ id: 'aris', name: 'Aris', image: 'scorpion.png', position: 'right' }],
     dialogue: [
-      "The hum subsides into a warm, golden glow.",
-      "Suddenly, a rift opens. A figure steps through, her body made of pure starlight.",
-      "'Human... you play with currents you do not understand,' Lyra whispers."
+      "(Experiment No. 1: The Scorpion. Lord Haelen's daughter, fused with a Scorpion Beast Dredge. She doesn't even remember her father sitting three tables away.)"
     ],
     choices: [
-      { id: 'apologize', text: "'I was only seeking progress.'", nextSceneId: 'negotiation_path', impact: { stat: 'Insight', value: 5 } },
-      { id: 'defend', text: "'And who are you to judge my discovery?'", nextSceneId: 'confrontation_path', impact: { stat: 'Sin', value: 10 } }
+      { id: 'ruth', text: "“Grief is a variable we ignore.”", nextSceneId: 'main_hall', impact: { stat: 'Ruthless', value: 1 } },
+      { id: 'gent', text: "“A heavy price for progress.”", nextSceneId: 'main_hall', impact: { stat: 'Gentle', value: 1 } }
     ]
   },
-  chaos_path: {
-    id: 'chaos_path',
-    background: 'https://picsum.photos/seed/destruction/1920/1080',
-    characters: [
-      { id: 'aris', name: 'Dr. Aris', image: '/aris.png', position: 'center' }
-    ],
+
+  exp_acrux: {
+    id: 'exp_acrux',
+    background: 'angel.jpg.jpeg',
+    characters: [{ id: 'aris', name: 'Aris', image: 'arisangry.png', position: 'right' }],
     dialogue: [
-      "The walls scream as the aether tears through the laboratory.",
-      "I feel... lighter. As if my very atoms are being rewritten.",
-      "This is not energy! This is the Descent!"
+      "(Experiment No. 2: Acrux. I managed to bridge the gap between divine Seraphim DNA and Dredge filth. A creature of black-streaked wings and blackened eyes.)"
     ],
     choices: [
-      { id: 'embrace', text: 'Embrace the transformation', nextSceneId: 'sinner_path', impact: { stat: 'Sin', value: 30 } },
-      { id: 'resist', text: 'Try to shut it down', nextSceneId: 'minigame_shutdown' }
+      { id: 'ruth', text: "“He is my ultimate weapon.”", nextSceneId: 'main_hall', impact: { stat: 'Ruthless', value: 1 } },
+      { id: 'gent', text: "“He is a new lifeform.”", nextSceneId: 'main_hall', impact: { stat: 'Gentle', value: 1 } }
     ]
   },
-  minigame_shutdown: {
-    id: 'minigame_shutdown',
-    background: 'https://picsum.photos/seed/glitch/1920/1080',
-    characters: [],
+
+  admire_elara: {
+    id: 'admire_elara',
+    background: 'bg.jpg.jpeg',
+    characters: [
+      { id: 'elara', name: 'Elara', image: 'elara.png', position: 'left' },
+      { id: 'aris', name: 'Aris', image: 'aris.png', position: 'right' }
+    ],
+    dialogue: ["(My other half. To the world she is a flower; to me, she is the reason I am building this new world.)"],
+    choices: [
+      { id: 'warm', text: "Look with warmth", nextSceneId: 'main_hall', impact: { stat: 'Affection', value: 5 } },
+      { id: 'frown', text: "Look with a frown", nextSceneId: 'main_hall', impact: { stat: 'Affection', value: -5 } },
+      { id: 'love', text: "Look with love", nextSceneId: 'main_hall', impact: { stat: 'Affection', value: 10 } }
+    ]
+  },
+
+  main_hall: {
+    id: 'main_hall',
+    background: 'bg.jpeg',
+    characters: [
+      { id: 'elara', name: 'Elara', image: 'elarasmirk.png', position: 'left' }
+    ],
     isMiniGame: true,
-    dialogue: ["Manual shutdown required. Realign the emergency conduits!"],
+    dialogue: ["Beside him, Lady Elara von Thorne finally approaches. It is time to stabilize the encounter."],
     choices: [
-      { id: 'done', text: 'Conduits sealed', nextSceneId: 'stable_path' }
+      { id: 'finish_minigame', text: 'Engage', nextSceneId: 'final_dialogue' }
     ]
   },
-  sinner_path: {
-     id: 'sinner_path',
-     background: 'https://picsum.photos/seed/void/1920/1080',
-     characters: [{ id: 'sinner_aris', name: 'Ascended Aris', image: 'https://api.dicebear.com/7.x/bottts/svg?seed=chaos_aris', position: 'center' }],
-     dialogue: ["'The world below seems so small now,' Aris laughs, his voice echoing in the void.", "You have become what they feared. A Sinner of the First Core."],
-     choices: [{ id: 'restart', text: 'Replay the Cycle', nextSceneId: 'intro' }]
-  },
-  negotiation_path: {
-    id: 'negotiation_path',
-    background: 'https://picsum.photos/seed/sanctum/1920/1080',
-    characters: [{ id: 'lyra', name: 'Lyra', image: 'https://api.dicebear.com/7.x/bottts/svg?seed=lyra', position: 'center' }],
-    dialogue: ["Lyra takes your hand. The laboratory dissolves into a shimmering garden.", "'Progress is a double-edged blade, Aris. Let us find the middle way.'"],
-    choices: [{ id: 'restart', text: 'End of Chapter 1 - Replay', nextSceneId: 'intro' }]
+
+  final_dialogue: {
+    id: 'final_dialogue',
+    background: 'bg.jpeg',
+    characters: [{ id: 'elara', name: 'Elara', image: 'elarasmirk.png', position: 'left' }],
+    dialogue: ["Then let us leave this place behind. I am tired of the perfume of the living dead. I want more blood. More power."],
+    choices: [{ id: 'restart', text: 'Replay the Cycle', nextSceneId: 'intro' }]
   }
 };
-
